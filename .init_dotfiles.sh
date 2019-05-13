@@ -7,3 +7,4 @@ if [ ! -f "$PLUG_FILE" ]; then
 fi
 
 alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+config config --local status.showUntrackedFiles no

@@ -279,10 +279,10 @@ let g:lightline = {
     \ },
     \ 'colorscheme': '16color',
     \ }
-let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
-let s:palette.normal.middle = [ [ 8, 8, 8, 8 ] ]
-let s:palette.inactive.middle = s:palette.normal.middle
-let s:palette.tabline.middle = s:palette.normal.middle
+" let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+" let s:palette.normal.middle = [ [ 8, 8, 8, 8 ] ]
+" let s:palette.inactive.middle = s:palette.normal.middle
+" let s:palette.tabline.middle = s:palette.normal.middle
 
 function! LightlineReadonly()
     return &readonly ? '' : ''
