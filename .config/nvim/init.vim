@@ -234,8 +234,8 @@ endfunction
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
-vmap <leader>m <Plug>(coc-format-selected)
-nmap <leader>m <Plug>(coc-format-selected)
+vmap <leader>ef <Plug>(coc-format-selected)
+nmap <leader>ef <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -246,13 +246,13 @@ augroup mygroup
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-vmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+vmap <leader>ev  <Plug>(coc-codeaction-selected)
+nmap <leader>ev  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ea  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
-" nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>eq  <Plug>(coc-fix-current)
 
 " Use `:Format` for format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -297,8 +297,6 @@ endfunction
 
 let g:coc_status_warning_sign=''
 let g:coc_status_error_sign=''
-
-" hi CocUnderline guibg=Red
 
 " " Using CocList
 " " Show all diagnostics

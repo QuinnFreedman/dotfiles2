@@ -37,3 +37,7 @@ if exists('g:lightline')
 endif
 call lightline#init()
 call lightline#update()
+
+hi CocUnderline gui=underline 
+" guibg=Red
+

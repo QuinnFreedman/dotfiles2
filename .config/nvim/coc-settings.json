@@ -1,5 +1,5 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["python"],
+    "coc.preferences.formatOnSaveFiletypes": ["python", "css", "Markdown", "javscript"],
     //"python.formatting.provider": "black"
     "python.formatting.provider": "autopep8"
 }
