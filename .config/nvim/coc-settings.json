@@ -1,5 +1,30 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["python", "css", "Markdown", "javscript"],
-    //"python.formatting.provider": "black"
-    "python.formatting.provider": "autopep8"
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python",
+    "css",
+    "Markdown",
+    "javscript"
+  ],
+  //"python.formatting.provider": "black"
+  //"python.formatting.provider": "autopep8",
+
+  "languageserver": {
+    "elmLS": {
+      "command": "elm-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "runtime": "node",
+        "elmPath": "elm",
+        "elmFormatPath": "elm-format",
+        "elmTestPath": "elm-test"
+      }
+    },
+    "nim": {
+      "command": "/home/quinn/.nimble/bin/nimlsp",
+      "args": ["/home/quinn/.choosenim/toolchains/nim-0.20.0"],
+      "filetypes": ["nim"]
+    }
+  }
 }

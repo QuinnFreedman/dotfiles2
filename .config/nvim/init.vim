@@ -153,6 +153,11 @@ Plug 'itchyny/lightline.vim'
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
+try 
+    source ~/.config/nvim/local_plugins.vim
+catch
+endtry 
+
 call plug#end()
 
 let g:highlightedyank_highlight_duration = 300
@@ -317,4 +322,8 @@ let g:coc_status_error_sign=''
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "
 
-
+try 
+    source ~/.config/nvim/local.vim
+catch
+  " ignore
+endtry 

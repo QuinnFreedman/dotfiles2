@@ -97,21 +97,43 @@ fi
 
 prompt_context() {}
 
+
+# auto-load dotfile manager
+
+include () {
+    [[ -f "$1" ]] && source "$1"
+}
+
+include ~/.init_dotfiles.sh
+
+
+# aliases
+
 alias vi="nvim"
 alias vim="nvim"
+alias g="gvim"
 alias open="xdg-open"
 
 alias ls='lsd'
-alias l='ls -l'
+alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -laF'
 alias lt='ls --tree'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="~/.local/bin:$PATH"
 export PATH="$PATH:~/go/bin"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/home/quinn/.nimble/bin:$PATH"
+export PATH=~/.local/bin:$PATH
+export PATH=$PATH:/usr/local/gcc-arm/bin
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
 
 # export $fpath="/usr/bin/zsh/functions/_alacritty:$fpath"

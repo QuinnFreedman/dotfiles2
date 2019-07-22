@@ -1,4 +1,3 @@
-
 let s:black = [ '#232526', 233 ] " 272822
 let s:gray = [ '#808080', 244 ]
 let s:white = [ '#f8f8f2', 234 ]
@@ -41,3 +40,11 @@ call lightline#update()
 hi CocUnderline gui=underline 
 " guibg=Red
 
+GuiPopupmenu 0
+
+
+try 
+    source ~/.config/nvim/glocal.vim
+catch
+  " ignore
+endtry 
