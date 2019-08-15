@@ -132,6 +132,12 @@ omap au :normal vau<CR>
 omap iu :normal viu<CR>
 
 
+" ********************************************
+" File-type specified
+" ********************************************
+
+autocmd BufWritePre *.go Format
+
 
 " ********************************************
 "           Plugins
@@ -146,12 +152,14 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'sickill/vim-monokai'
-
 Plug 'itchyny/lightline.vim'
 
-
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+
+" Themes
+Plug 'sickill/vim-monokai'
+" Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'NLKNguyen/papercolor-theme'
 
 try 
     source ~/.config/nvim/local_plugins.vim
@@ -187,7 +195,7 @@ set updatetime=300
 set shortmess+=c
 
 " always show signcolumns
-" set signcolumn=yes
+set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.

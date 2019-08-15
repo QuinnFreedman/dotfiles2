@@ -122,11 +122,11 @@ alias lt='ls --tree'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="$PATH:~/go/bin"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/home/quinn/.nimble/bin:$PATH"
 export PATH=~/.local/bin:$PATH
+export PATH=$PATH:~/go/bin
 export PATH=$PATH:/usr/local/gcc-arm/bin
 
 # pyenv

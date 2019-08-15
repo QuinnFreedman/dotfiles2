@@ -9,6 +9,14 @@
   //"python.formatting.provider": "autopep8",
 
   "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+          "formatTool": "gofmt"
+      }
+    },
     "elmLS": {
       "command": "elm-language-server",
       "args": ["--stdio"],
