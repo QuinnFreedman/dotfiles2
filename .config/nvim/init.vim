@@ -60,6 +60,10 @@ map <leader>t :tabnew<CR>
 nnoremap <leader>R :%s/
 set inccommand=split
 
+nnoremap <C-o> o<Esc>
+nnoremap <M-o> <S-o><Esc>
+
+
 " *******************************************
 " Appearance
 " *******************************************
@@ -156,6 +160,8 @@ Plug 'itchyny/lightline.vim'
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
+Plug 'Townk/vim-autoclose'
+
 " Themes
 Plug 'sickill/vim-monokai'
 " Plug 'sonph/onehalf', {'rtp': 'vim/'}
@@ -172,9 +178,12 @@ let g:highlightedyank_highlight_duration = 300
 hi HighlightedyankRegion ctermbg=7 guibg=LightGray
 
 nmap <leader>f <Plug>(easymotion-bd-w)
+nmap gw <Plug>(easymotion-bd-w)
 nmap s <Plug>(easymotion-bd-f)
 nmap <leader>gl <Plug>(easymotion-overwin-line)
+nmap gl <Plug>(easymotion-overwin-line)
 
+nnoremap <CR> :FZF<CR>
 nnoremap <leader>of :FZF<CR>
 nnoremap <leader>ob :Buffers<CR>
 nnoremap <leader>om :Marks<CR>
@@ -283,7 +292,7 @@ let g:lightline = {
     \ 'component_function': {
     \   'readonly': 'LightlineReadonly',
     \   'fugitive': 'LightlineFugitive',
-    \   'cocstatus': 'coc#status'
+    \   'cocstatus': 'coc#status',
     \ },
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
@@ -308,8 +317,8 @@ function! LightlineFugitive()
     return ''
 endfunction
 
-let g:coc_status_warning_sign=''
-let g:coc_status_error_sign=''
+let g:coc_status_warning_sign="\uf071"
+let g:coc_status_error_sign="\uf06a"
 
 " " Using CocList
 " " Show all diagnostics
@@ -330,8 +339,21 @@ let g:coc_status_error_sign=''
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "
 
+
+function! IsBetweenBraces()
+    let l:left = getline('.')[col('.')-2]
+    let l:right = getline('.')[col('.')-1]
+    echom left . right
+    return (l:left == '{' && l:right == '}') || (l:left == '(' && l:right == ')')
+
+endfunction
+
+inoremap <expr> <CR> IsBetweenBraces() ? '<CR><Esc>ko' : '<CR>'
+
 try 
     source ~/.config/nvim/local.vim
 catch
   " ignore
 endtry 
+
+
