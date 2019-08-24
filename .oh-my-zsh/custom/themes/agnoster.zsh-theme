@@ -230,6 +230,12 @@ prompt_status() {
   [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
 }
 
+newline_if_too_long() {
+  local blue_arrow="%{%F{blue}%}$SEGMENT_SEPARATOR%{%f%}"
+  local blue_space="%{%F{black}%}%{%K{blue}%} ↳ %{%k%}%{%f%}"
+  echo -n "%-30(l::\n$blue_space$blue_arrow)"
+}
+
 ## Main prompt
 build_prompt() {
   RETVAL=$?
@@ -241,6 +247,7 @@ build_prompt() {
   prompt_bzr
   prompt_hg
   prompt_end
+  newline_if_too_long
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
