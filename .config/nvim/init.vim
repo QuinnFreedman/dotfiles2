@@ -152,6 +152,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion' 
+Plug 'yuttie/comfortable-motion.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -165,6 +166,7 @@ Plug 'Townk/vim-autoclose'
 " Themes
 Plug 'sickill/vim-monokai'
 " Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'andreypopp/vim-colors-plain'
 Plug 'NLKNguyen/papercolor-theme'
 
 try 
@@ -173,6 +175,12 @@ catch
 endtry 
 
 call plug#end()
+
+
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
 
 let g:highlightedyank_highlight_duration = 300
 hi HighlightedyankRegion ctermbg=7 guibg=LightGray
