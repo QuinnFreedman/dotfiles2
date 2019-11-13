@@ -76,6 +76,7 @@ hi! link SignColumn LineNr
 if line_numbers
   hi! link VertSplit LineNr
 endif
+hi! link VertSplit LineNr
 
 hi CursorLine cterm=NONE ctermbg=16 ctermfg=NONE gui=NONE
 
@@ -168,6 +169,7 @@ Plug 'sickill/vim-monokai'
 " Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'andreypopp/vim-colors-plain'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
 try 
     source ~/.config/nvim/local_plugins.vim
@@ -307,7 +309,7 @@ let g:lightline = {
     \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ],
     \   'right': [ ['lineinfo'], ['percent'] ]
     \ },
-    \ 'colorscheme': '16color',
+    \ 'colorscheme': 'challenger_deep',
     \ }
 " let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
 " let s:palette.normal.middle = [ [ 8, 8, 8, 8 ] ]

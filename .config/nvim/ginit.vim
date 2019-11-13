@@ -45,8 +45,8 @@ elseif s:theme_plain
         let s:p.tabline.right = copy(s:p.normal.right)
         let s:p.tabline.tabsel = [ [ s:black, s:medium_gray ] ]
     
-        let g:lightline#colorscheme#monokai#palette = lightline#colorscheme#flatten(s:p)
-        let g:lightline.colorscheme='monokai'
+        let g:lightline#colorscheme#plain#palette = lightline#colorscheme#flatten(s:p)
+        let g:lightline.colorscheme='plain'
 
     endif
 else
