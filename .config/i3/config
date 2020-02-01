@@ -262,7 +262,7 @@ bindsym $mod+Shift+c exec chromium-browser --incognito
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
-exec --no-startup-id ~/.config/i3/scripts/configure-trackpad.sh
+exec --no-startup-id ~/.config/i3/scripts/configure-trackpad.sh 13
 
 exec_always --no-startup-id kill $(ps -A | grep redshift | awk '/[0-9]+/{print $1}')
 exec_always --no-startup-id redshift -x

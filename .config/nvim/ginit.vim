@@ -1,3 +1,5 @@
+set mouse=a
+
 let s:theme_paper = 0
 let s:theme_plain = 1
 if s:theme_paper 
@@ -87,7 +89,7 @@ else
     endif
 endif
 
-Guifont Hack Nerd Font Mono:h13
+" Guifont Hack Nerd Font Mono:h13
 call lightline#init()
 call lightline#update()
 

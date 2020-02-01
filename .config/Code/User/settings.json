@@ -4,13 +4,21 @@
     "vim.useSystemClipboard": true,
     "vim.insertModeKeyBindings": [
         {
-          "before": ["k", "j"],
-          "after": ["<Esc>"]
+            "before": [
+                "k",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         }
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": ["<leader>", "w"],
+            "before": [
+                "<leader>",
+                "w"
+            ],
             "commands": [
                 "workbench.action.files.save"
             ]

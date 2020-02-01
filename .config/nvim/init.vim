@@ -116,10 +116,10 @@ autocmd VimEnter,WinEnter,BufWInEnter * :wincmd =
 
 " Auto resize splits
 set winwidth=104
-" set winminwidth=5
 set winheight=10
 set winminheight=10
-set winheight=999
+" set winheight=999
+autocmd WinEnter * wincmd _
 
 " *******************************************
 " Ctrl D
@@ -365,5 +365,3 @@ try
 catch
   " ignore
 endtry 
-
-

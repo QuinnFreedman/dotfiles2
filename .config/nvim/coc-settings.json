@@ -7,7 +7,7 @@
   ],
   //"python.formatting.provider": "black"
   //"python.formatting.provider": "autopep8",
-
+  "python.linting.pylintArgs": ["--extension-pkg-whitelist=cv2", "--disable=C0111"],
   "languageserver": {
     "golang": {
       "command": "gopls",
