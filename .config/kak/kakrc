@@ -1,0 +1,54 @@
+#
+# Keybindings
+#
+
+hook global InsertChar j %{ try %{
+    exec -draft hH <a-k>kj<ret> d
+    exec <esc>
+}}
+
+map global user w :easy-motion-w<ret> -docstring 'Easymotion word' 
+map global user W :easy-motion-W<ret> -docstring 'Easymotion word'
+map global user j :easy-motion-j<ret> -docstring 'Easymotion J'
+map global user l :easymotion-alt-f<ret> -docstring 'Easymotion line'
+
+map global normal <c-p> '   !  xsel --output --clipboard <ret>'
+map global normal <c-P> '<a-!> xsel --output --clipboard <ret>'
+map global normal <c-y> '<a-|> xsel --input --clipboard <ret>'
+
+map global normal D xd
+
+set global tabstop 4                                                        
+set global indentwidth 4
+
+# Expnd tabs to spaces
+hook global WinSetOption filetype=(?!go).* %{
+    hook window InsertChar \t %{ exec -draft -itersel h@ }
+}
+
+
+#
+# Plugins
+#
+
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+plug "andeyost/plug.kak" noload config %{
+    set-option global plug_always_ensure true
+}
+
+plug "ul/kak-lsp" do %{
+    cargo build --release --locked
+    cargo install --force --path .
+}
+
+plug 'delapouite/kakoune-text-objects' %{
+  text-object-map
+}
+
+plug "danr/kakoune-easymotion"
+
+hook global WinSetOption filetype=(elm|rust|python|go|javascript|typescript|c|cpp) %{
+    lsp-enable-window
+    hook window BufWritePre .* lsp-formatting-sync
+}
+
