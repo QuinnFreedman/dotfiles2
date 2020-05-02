@@ -138,9 +138,11 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-# assign [class="Spotify"] $ws9 #TODO why doesn't this work
 for_window [class="Spotify"] move to workspace $ws9
 for_window [class="Gnome-calculator"] floating enable, border normal
+for_window [class="matplotlib"] floating enable, border normal
+for_window [class="Pavucontrol"] floating enable
+
 
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec zenity --question --width=200 --title="Log out?" --text="Are you sure you want to log out?" && i3-msg exit
@@ -237,8 +239,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%
 bindsym XF86AudioMute        exec --no-startup-id amixer -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -time 0 -steps 1 -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -time 0 -steps 1 -dec 5 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec --no-startup-id /some/path/toggletouchpad.sh # toggle touchpad
@@ -264,7 +266,7 @@ bindsym $mod+minus scratchpad show
 
 exec --no-startup-id ~/.config/i3/scripts/configure-trackpad.sh 13
 
-exec_always --no-startup-id kill $(ps -A | grep redshift | awk '/[0-9]+/{print $1}')
+exec_always --no-startup-id killall redshift
 exec_always --no-startup-id redshift -x
 exec_always --no-startup-id redshift -l 48.5:-123
 
