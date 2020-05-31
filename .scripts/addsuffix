@@ -1,0 +1,19 @@
+#!/bin/bash
+# addsuffix <suffix> <files>
+
+if [ "$#" -ne 2 ]; then
+    echo "usage: addsuffix <suffix> <files>"
+    exit 1
+fi
+
+suffix=$1
+shift
+for f in "$@"
+do
+  extension=${f##*.}
+  if [ -z $extension ]; then
+    mv "$f" "$f$suffix"
+  else
+    mv "$f" "${f%.$extension}$suffix.$extension"
+  fi
+done

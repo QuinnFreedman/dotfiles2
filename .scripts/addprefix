@@ -1,0 +1,14 @@
+#!/bin/bash
+# Usage: addprefix <prefix> <files>
+
+if [ "$#" -lt 2 ]; then
+    echo "usage: addprefix <prefix> <files>"
+    exit 1
+fi
+
+prefix=$1
+shift
+for f in "$@"
+do
+  mv "$f" "$prefix$f"
+done

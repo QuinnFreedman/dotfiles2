@@ -122,6 +122,7 @@ alias lt='ls --tree'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export PATH="$HOME/.scripts:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/home/quinn/.nimble/bin:$PATH"

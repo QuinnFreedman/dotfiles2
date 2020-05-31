@@ -1,0 +1,2 @@
+#!/usr/bin/zsh
+echo $PATH | sed -r s/:/\\n/g
