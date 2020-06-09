@@ -125,10 +125,11 @@ alias lt='ls --tree'
 export PATH="$HOME/.scripts:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/home/quinn/.nimble/bin:$PATH"
-export PATH=~/.local/bin:$PATH
-export PATH=$PATH:~/go/bin
-export PATH=$PATH:/usr/local/gcc-arm/bin
+export PATH="$HOME/.nimble/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/usr/local/gcc-arm/bin:$PATH"
+export PATH="/usr/local/lib/nodejs/bin:$PATH"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -137,4 +138,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
-# export $fpath="/usr/bin/zsh/functions/_alacritty:$fpath"
+if [[ ! -z "$WSL_DISTRO_NAME" && -t 1 && -z "$TMUX" ]]; then
+    # running inside WSL terminal
+    tmux new-session -A -s main
+fi
