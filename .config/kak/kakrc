@@ -102,6 +102,8 @@ plug 'delapouite/kakoune-select-view' %{
 
 plug "danr/kakoune-easymotion"
 
+plug "occivink/kakoune-sudo-write"
+
 
 # plug "andreyorst/fzf.kak"
 # 

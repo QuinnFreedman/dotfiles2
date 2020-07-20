@@ -42,7 +42,8 @@ bindsym $mod+Shift+q kill
 set $popup-fg #384246
 set $popup-bg #CFD8DC 
 
-set_from_resource $rofiTheme rofi.theme ".config/i3/deep-theme"
+#set_from_resource $rofiTheme rofi.theme ".config/i3/deep-theme"
+set $rofiTheme ".config/i3/deep-theme"
 
 # rofi app and window launchers
 bindsym $mod+space exec rofi -show drun -theme $rofiTheme -show-icons
@@ -209,7 +210,8 @@ bar {
     position top
     colors {
 		background $black
-	    separator #424c51  # 899093
+	    separator #424c51
+	    #^ 899093
 		#                  border             background         text
 		focused_workspace  $purple            $purple            $black
 		inactive_workspace $black             $black             $green 
@@ -217,14 +219,15 @@ bar {
 	}
 }
 
-gaps inner 0
-gaps outer 0
-smart_borders on
-new_window none
-smart_gaps on
+#gaps inner 0
+#gaps outer 0
+#smart_borders on
+# new_window none
+#default_border none
+#smart_gaps on
 for_window [class=".*"] border pixel 3
 
-exec --no-startup-id xrandr --dpi 256
+# exec --no-startup-id xrandr --dpi 256
 
 # Pulse Audio controls
 # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && pkill -RTMIN+1 i3blocks #increase sound volume
@@ -258,8 +261,8 @@ bindsym $mod+Ctrl+s exec --no-startup-id playerctl play-pause
 bindsym $mod+Ctrl+l exec --no-startup-id playerctl next
 bindsym $mod+Ctrl+h exec --no-startup-id playerctl previous
 
-bindsym $mod+c exec chromium-browser
-bindsym $mod+Shift+c exec chromium-browser --incognito
+bindsym $mod+c exec firefox
+bindsym $mod+Shift+c exec firefox -private
 
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
