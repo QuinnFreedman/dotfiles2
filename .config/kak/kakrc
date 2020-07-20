@@ -22,11 +22,6 @@ map global normal Y xy
 set global tabstop 4                                                        
 set global indentwidth 4
 
-# Expnd tabs to spaces
-hook global WinSetOption filetype=(?!go).* %{
-    hook window InsertChar \t %{ exec -draft -itersel h@ }
-}
-
 set global ui_options ncurses_assistant=none
 
 #
@@ -46,6 +41,7 @@ set global ui_options ncurses_assistant=none
 #
 # Colors
 #
+#colorscheme gruvbox
 face global PrimarySelection black,blue+fg
 face global SecondarySelection black,magenta+fg
 
@@ -79,17 +75,17 @@ plug 'delapouite/kakoune-buffers' %{
 }
 
 plug "andreyorst/smarttab.kak" defer smarttab %{
-    set-option global sofftabstop 4
+    set-option global softtabstop 4
 } config %{
-    hook global WinSetOption filetype=* expandtab
+    hook global WinSetOption filetype=(?!go).* expandtab
+    hook global WinSetOption filetype=(go) smarttab
 }
 
 plug "alexherbo2/auto-pairs.kak"
 
-plug "ul/kak-lsp" do %{
-    cargo build --release --locked
-    cargo install --force --path .
-}
+# plug "ul/kak-lsp" do %{
+#     cargo.exe install --locked --force --path .
+# }
 
 plug 'delapouite/kakoune-text-objects' %{
   text-object-map
@@ -103,7 +99,6 @@ plug 'delapouite/kakoune-select-view' %{
 plug "danr/kakoune-easymotion"
 
 plug "occivink/kakoune-sudo-write"
-
 
 # plug "andreyorst/fzf.kak"
 # 
