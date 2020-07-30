@@ -83,13 +83,25 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
 
 plug "alexherbo2/auto-pairs.kak"
 
-# plug "ul/kak-lsp" do %{
-#     cargo.exe install --locked --force --path .
-# }
+plug "ul/kak-lsp" do %{
+    cargo.exe install --locked --force --path .
+} config %{
+    hook global WinSetOption filetype=(elm|rust|python|go|javascript|typescript|c|cpp) %{
+        lsp-enable-window
+        lsp-auto-hover-disable
+        lsp-auto-signature-help-enalbe
+        hook window BufWritePre .* lsp-formatting-sync
+    }
+
+    map global user h :lsp-hover<ret> -docstring 'LSP hover' 
+    map global user p :lsp-signature-help<ret> -docstring 'LSP signature'
+    map global user g :enter-user-mode<space>lsp<ret> -docstring 'LSP'
+}
 
 plug 'delapouite/kakoune-text-objects' %{
   text-object-map
 }
+
 plug 'delapouite/kakoune-select-view' %{
     # Suggested mappings
     map global normal <a-%> ': select-view<ret>' -docstring 'select view'
@@ -100,6 +112,8 @@ plug "danr/kakoune-easymotion"
 
 plug "occivink/kakoune-sudo-write"
 
+# plug "caksoylar/kakoune-smooth-scroll"
+
 # plug "andreyorst/fzf.kak"
 # 
 # source "%val{config}/plugins/fzf.kak/rc/fzf-file.kak"   # fzf file chooser
@@ -109,12 +123,6 @@ plug "occivink/kakoune-sudo-write"
 # source "%val{config}/plugins/fzf.kak/rc/fzf-ctags.kak"  # search for tag in your project ctags file
 # 
 # map global normal <enter> ': fzf-mode<ret>'
-
-# hook global WinSetOption filetype=(elm|rust|python|go|javascript|typescript|c|cpp) %{
-#     lsp-enable-window
-#     lsp-auto-hover-enable
-#     hook window BufWritePre .* lsp-formatting-sync
-# }
 
 define-command ctrld -docstring 'does the ctrl-d thing' %{
     try %{
