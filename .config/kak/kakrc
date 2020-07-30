@@ -41,16 +41,16 @@ set global ui_options ncurses_assistant=none
 #
 # Colors
 #
-colorscheme gruvbox
-# face global PrimarySelection black,blue+fg
-# face global SecondarySelection black,magenta+fg
+#colorscheme gruvbox
+face global PrimarySelection black,blue+fg
+face global SecondarySelection black,magenta+fg
 
-# face global PrimaryCursor   black,white+fg
-# face global SecondaryCursor magenta,white+fg
+face global PrimaryCursor   black,white+fg
+face global SecondaryCursor magenta,white+fg
 
-# face global MenuInfo black,blue
-# face global MenuBackground black,blue
-# face global MenuForeground blue,black
+face global MenuInfo black,blue
+face global MenuBackground black,blue
+face global MenuForeground blue,black
 
 #
 # Plugins
@@ -97,6 +97,7 @@ plug 'delapouite/kakoune-select-view' %{
 }
 
 plug "danr/kakoune-easymotion"
+
 plug "occivink/kakoune-sudo-write"
 
 # plug "andreyorst/fzf.kak"
