@@ -109,21 +109,25 @@ include ~/.init_dotfiles.sh
 
 # aliases
 
-alias vi="nvim"
-alias vim="nvim"
-alias g="gvim"
+if command -v nvim 2>/dev/null; then
+    alias vi="nvim"
+    alias vim="nvim"
+fi
+
+if command -v gvim 2>/dev/null; then
+    alias g="gvim"
+fi
 alias open="xdg-open"
 
 alias ls='lsd'
-alias ll='ls -l'
+alias ll='ls -lh'
 alias la='ls -a'
-alias lla='ls -laF'
+alias lla='ls -lahF'
 alias lt='ls --tree'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH="$HOME/.scripts:$PATH"
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.nimble/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -132,6 +136,10 @@ export PATH="$HOME/usr/local/gcc-arm/bin:$PATH"
 export PATH="/usr/local/lib/nodejs/bin:$PATH"
 export PATH="$HOME/.local/share/umake/bin/:$PATH"
 export PATH="$HOME/.local/share/umake/nodejs/nodejs-lang/bin:$PATH"
+
+if command -v yarn 2>/dev/null; then
+    export PATH="$(yarn global bin):$PATH"
+fi
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -164,3 +172,7 @@ function apt-history(){
               ;;
       esac
 }
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
