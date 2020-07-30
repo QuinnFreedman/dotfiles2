@@ -109,12 +109,12 @@ include ~/.init_dotfiles.sh
 
 # aliases
 
-if command -v nvim 2>/dev/null; then
+if command -v nvim &>/dev/null; then
     alias vi="nvim"
     alias vim="nvim"
 fi
 
-if command -v gvim 2>/dev/null; then
+if command -v gvim &>/dev/null; then
     alias g="gvim"
 fi
 alias open="xdg-open"
@@ -137,8 +137,9 @@ export PATH="/usr/local/lib/nodejs/bin:$PATH"
 export PATH="$HOME/.local/share/umake/bin/:$PATH"
 export PATH="$HOME/.local/share/umake/nodejs/nodejs-lang/bin:$PATH"
 
-if command -v yarn 2>/dev/null; then
-    export PATH="$(yarn global bin):$PATH"
+if command -v yarn &>/dev/null; then
+    # export PATH="$(yarn global bin):$PATH"
+    export PATH="$HOME/.npm_modules/bin:$PATH"
 fi
 
 # pyenv

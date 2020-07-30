@@ -84,7 +84,7 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
 plug "alexherbo2/auto-pairs.kak"
 
 plug "ul/kak-lsp" do %{
-    cargo.exe install --locked --force --path .
+    cargo install --locked --force --path .
 } config %{
     hook global WinSetOption filetype=(elm|rust|python|go|javascript|typescript|c|cpp) %{
         lsp-enable-window
