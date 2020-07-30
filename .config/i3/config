@@ -242,8 +242,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%
 bindsym XF86AudioMute        exec --no-startup-id amixer -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -time 0 -steps 1 -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -time 0 -steps 1 -dec 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightlight -p -i 5
+bindsym XF86MonBrightnessDown exec --no-startup-id brightlight -p -d 5
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec --no-startup-id /some/path/toggletouchpad.sh # toggle touchpad
