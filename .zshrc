@@ -130,6 +130,8 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/usr/local/gcc-arm/bin:$PATH"
 export PATH="/usr/local/lib/nodejs/bin:$PATH"
+export PATH="$HOME/.local/share/umake/bin/:$PATH"
+export PATH="$HOME/.local/share/umake/nodejs/nodejs-lang/bin:$PATH"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -142,3 +144,23 @@ if [[ ! -z "$WSL_DISTRO_NAME" && -t 1 && -z "$TMUX" ]]; then
     # running inside WSL terminal
     tmux new-session -A -s main
 fi
+
+function apt-history(){
+      case "$1" in
+        install)
+              cat /var/log/dpkg.log | grep 'install '
+              ;;
+        upgrade|remove)
+              cat /var/log/dpkg.log | grep $1
+              ;;
+        rollback)
+              cat /var/log/dpkg.log | grep upgrade | \
+                  grep "$2" -A10000000 | \
+                  grep "$3" -B10000000 | \
+                  awk '{print $4"="$5}'
+              ;;
+        *)
+              cat /var/log/dpkg.log
+              ;;
+      esac
+}
