@@ -7,11 +7,6 @@ hook global InsertChar j %{ try %{
     exec <esc>
 }}
 
-map global user w :easy-motion-w<ret> -docstring 'Easymotion word' 
-map global user W :easy-motion-W<ret> -docstring 'Easymotion word'
-map global user j :easy-motion-j<ret> -docstring 'Easymotion J'
-map global user l :easymotion-alt-f<ret> -docstring 'Easymotion line'
-
 map global normal <c-p> '   !  xsel --output --clipboard <ret>'
 map global normal <c-P> '<a-!> xsel --output --clipboard <ret>'
 map global normal <c-y> '<a-|> xsel --input --clipboard <ret>'
@@ -89,7 +84,7 @@ plug "ul/kak-lsp" do %{
     hook global WinSetOption filetype=(elm|rust|python|go|javascript|typescript|c|cpp) %{
         lsp-enable-window
         lsp-auto-hover-disable
-        lsp-auto-signature-help-enalbe
+        # lsp-auto-signature-help-enalbe
         hook window BufWritePre .* lsp-formatting-sync
     }
 
@@ -108,21 +103,7 @@ plug 'delapouite/kakoune-select-view' %{
     map global view s '<esc>: select-view<ret>' -docstring 'select view'
 }
 
-plug "danr/kakoune-easymotion"
-
 plug "occivink/kakoune-sudo-write"
-
-# plug "caksoylar/kakoune-smooth-scroll"
-
-# plug "andreyorst/fzf.kak"
-# 
-# source "%val{config}/plugins/fzf.kak/rc/fzf-file.kak"   # fzf file chooser
-# source "%val{config}/plugins/fzf.kak/rc/fzf-buffer.kak" # switching buffers with fzf
-# source "%val{config}/plugins/fzf.kak/rc/fzf-search.kak" # search within file contents
-# source "%val{config}/plugins/fzf.kak/rc/fzf-cd.kak"     # change server's working directory
-# source "%val{config}/plugins/fzf.kak/rc/fzf-ctags.kak"  # search for tag in your project ctags file
-# 
-# map global normal <enter> ': fzf-mode<ret>'
 
 define-command ctrld -docstring 'does the ctrl-d thing' %{
     try %{

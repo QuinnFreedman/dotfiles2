@@ -31,21 +31,29 @@ def get_filenames(path, recursive):
                 yield path, f
 
 
-def get_file_renames(path, regex, rename, recursive):
+def get_file_renames(path, regex, inverse, rename, recursive):
     matcher = re.compile(regex)
     for dirpath, filename in get_filenames(path, recursive):
         path = join(dirpath, filename)
         match = matcher.search(path)
-        if match:
-            if rename:
-                new_path = rename.format(*match.groups())
-                yield path, new_path
-            else:
+        if inverse:
+            if not match:
                 yield path
+        else:
+            if match:
+                if rename:
+                    new_path = rename.format(*match.groups())
+                    yield path, new_path
+                else:
+                    yield path
 
 
-def process_files(path, regex, rename, recursive, preview):
-    files = get_file_renames(path, regex, rename, recursive)
+def process_files(path, regex, inverse, rename, recursive, preview):
+    if inverse and rename:
+        print("the '-not' flag does not work with --rename")
+        return 1
+    
+    files = get_file_renames(path, regex, inverse, rename, recursive)
 
     if not rename:
         for filepath in files:
@@ -83,6 +91,8 @@ if __name__ == "__main__":
             description="Select and rename files with Python regexs",
             epilog='Example: refind -r "^(.*)\.txt$" --rename "{0}.foo"'
             )
+    parser.add_argument("-not", action="store_true", dest='inverse',
+            help="Select files NOT matching REGEX.")
     parser.add_argument("regex", metavar="REGEX",
             help="The Python regex to match files with")
     parser.add_argument("-r", "--recursive", action="store_true",
@@ -94,4 +104,4 @@ if __name__ == "__main__":
             help="Preview the frist n renames before commiting. If no number is given, all will be previewed.")
     args = parser.parse_args()
 
-    process_files(".", args.regex, args.rename, args.recursive, args.preview)
+    sys.exit(process_files(".", args.regex, args.inverse, args.rename, args.recursive, args.preview))

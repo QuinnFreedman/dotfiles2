@@ -33,6 +33,7 @@
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
 CURRENT_BG='NONE'
+PROMPT_BUILDER=""
 
 case ${SOLARIZED_THEME:-dark} in
     light) CURRENT_FG='white';;
@@ -64,22 +65,22 @@ prompt_segment() {
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n " %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
+    PROMPT_BUILDER="$PROMPT_BUILDER %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
   else
-    echo -n "%{$bg%}%{$fg%} "
+    PROMPT_BUILDER="$PROMPT_BUILDER%{$bg%}%{$fg%} "
   fi
   CURRENT_BG=$1
-  [[ -n $3 ]] && echo -n $3
+  [[ -n $3 ]] && PROMPT_BUILDER="$PROMPT_BUILDER$3"
 }
 
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    PROMPT_BUILDER="$PROMPT_BUILDER %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
   else
-    echo -n "%{%k%}"
+    PROMPT_BUILDER="$PROMPT_BUILDER%{%k%}"
   fi
-  echo -n "%{%f%}"
+  PROMPT_BUILDER="$PROMPT_BUILDER%{%f%}"
   CURRENT_BG=''
 }
 
@@ -87,7 +88,7 @@ prompt_end() {
 # Each component will draw itself, and hide itself if no information needs to be shown
 
 # Context: user@hostname (who am I and where am I)
-prompt_context() {
+prompt_context_maybe() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
     prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
   fi
@@ -135,7 +136,7 @@ prompt_git() {
     zstyle ':vcs_info:*' formats ' %u%c'
     zstyle ':vcs_info:*' actionformats ' %u%c'
     vcs_info
-    echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
+    PROMPT_BUILDER="$PROMPT_BUILDER${ref/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
   fi
 }
 
@@ -147,15 +148,15 @@ prompt_bzr() {
         revision=`bzr log | head -n2 | tail -n1 | sed 's/^revno: //'`
         if [[ $status_mod -gt 0 ]] ; then
             prompt_segment yellow black
-            echo -n "bzr@"$revision "✚ "
+            PROMPT_BUILDER="$PROMPT_BUILDERbzr@"$revision "✚ "
         else
             if [[ $status_all -gt 0 ]] ; then
                 prompt_segment yellow black
-                echo -n "bzr@"$revision
+                PROMPT_BUILDER="$PROMPT_BUILDERbzr@"$revision
 
             else
                 prompt_segment green black
-                echo -n "bzr@"$revision
+                PROMPT_BUILDER="$PROMPT_BUILDERbzr@"$revision
             fi
         fi
     fi
@@ -178,7 +179,7 @@ prompt_hg() {
         # if working copy is clean
         prompt_segment green $CURRENT_FG
       fi
-      echo -n $(hg prompt "☿ {rev}@{branch}") $st
+      PROMPT_BUILDER='$PROMPT_BUILDER$(hg prompt "☿ {rev}@{branch}") $st'
     else
       st=""
       rev=$(hg id -n 2>/dev/null | sed 's/[^-0-9]//g')
@@ -192,7 +193,7 @@ prompt_hg() {
       else
         prompt_segment green $CURRENT_FG
       fi
-      echo -n "☿ $rev@$branch" $st
+      PROMPT_BUILDER="$PROMPT_BUILDER☿ $rev@$branch" $st
     fi
   fi
 }
@@ -201,11 +202,12 @@ prompt_hg() {
 prompt_dir() {
   # prompt_segment blue $CURRENT_FG '%~'
   local sepChar=$'\uE0B1'
-  PROMPT_STR=$(echo ${PWD/#$HOME/'~'} | sed "s/\// $sepChar /g")
-  PROMPT_STR=$(echo $PROMPT_STR | sed "s/^ $sepChar $/\//g")
-  PROMPT_STR=$(echo $PROMPT_STR | sed "s/^ $sepChar/\/ $sepChar/g")
+  PROMPT_STR=$(echo ${PWD/#$HOME/'~'} | \
+    sed "s/\// $sepChar /g" | \
+    sed "s/^ $sepChar $/\//g" | \
+    sed "s/^ $sepChar/\/ $sepChar/g" | \
+    awk -v len=$(($(tput cols)-23)) '{ if (length($0) > len) print "..." substr($0, length($0)-len, length($0)); else print; }')
   prompt_segment blue $CURRENT_FG $PROMPT_STR
-
 }
 
 # Virtualenv: current working virtualenv
@@ -233,7 +235,7 @@ prompt_status() {
 newline_if_too_long() {
   local blue_arrow="%{%F{blue}%}$SEGMENT_SEPARATOR%{%f%}"
   local blue_space="%{%F{black}%}%{%K{blue}%} ↳ %{%k%}%{%f%}"
-  echo -n "%-30(l::\n$blue_space$blue_arrow)"
+  PROMPT_BUILDER="$PROMPT_BUILDER%-30(l::\n$blue_space$blue_arrow)"
 }
 
 ## Main prompt
@@ -241,13 +243,24 @@ build_prompt() {
   RETVAL=$?
   prompt_status
   prompt_virtualenv
-  prompt_context
+  prompt_context_maybe
+  # before_len="$(echo -n "$PROMPT_BUILDER" | sed 's/%K{\w*}//g')"
+  # before_len="${#before_len}"
+  # echo -n $before_len
+  # pos="${pos[3,-1]}"
+  # echo -n "${pos}"
+  echo -n $PROMPT_BUILDER
+  PROMPT_BUILDER=""
   prompt_dir
   prompt_git
   prompt_bzr
   prompt_hg
   prompt_end
   newline_if_too_long
+  echo -n $PROMPT_BUILDER
+  # pos="$(echo -n "\e[6n")"
+  # pos="${pos[3,-1]}"
+  # pos="${${pos[4,-1]#*;}%R*}"
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
