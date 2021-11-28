@@ -17,7 +17,7 @@ map global normal Y xy
 set global tabstop 4                                                        
 set global indentwidth 4
 
-set global ui_options ncurses_assistant=none
+set global ui_options terminal_assistant=none
 
 #
 # Tab for both completion and indent
@@ -93,12 +93,9 @@ plug "ul/kak-lsp" do %{
     map global user g :enter-user-mode<space>lsp<ret> -docstring 'LSP'
 }
 
-plug 'delapouite/kakoune-text-objects' %{
-  text-object-map
-}
+plug 'delapouite/kakoune-text-objects' 
 
 plug 'delapouite/kakoune-select-view' %{
-    # Suggested mappings
     map global normal <a-%> ': select-view<ret>' -docstring 'select view'
     map global view s '<esc>: select-view<ret>' -docstring 'select view'
 }
