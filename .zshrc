@@ -64,7 +64,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git golang extract aws docker docker-compose)
+plugins=(git extract docker zsh-syntax-highlighting copydir copyfile)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -138,6 +138,8 @@ export PATH="$HOME/usr/local/gcc-arm/bin:$PATH"
 export PATH="/usr/local/lib/nodejs/bin:$PATH"
 export PATH="$HOME/.local/share/umake/bin/:$PATH"
 export PATH="$HOME/.local/share/umake/nodejs/nodejs-lang/bin:$PATH"
+
+fpath+=~/.zfunc
 
 if command -v yarn &>/dev/null; then
     # export PATH="$(yarn global bin):$PATH"
