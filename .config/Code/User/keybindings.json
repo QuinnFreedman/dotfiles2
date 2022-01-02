@@ -1,0 +1,29 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "q",
+        "command": "dance.seek.word.backward",
+        "when": "editorTextFocus && dance.mode == 'normal'",
+    },
+    {
+        "key": "shift+q",
+        "command": "dance.seek.word.extend.backward",
+        "when": "editorTextFocus && dance.mode == 'normal'",
+    },
+    {
+        "key": "k",
+        "command": "dance.openMenu",
+        "args": {
+          "menu": {
+            "items": {
+              "j": {
+                "text": "escape to Normal",
+                "command": "dance.modes.set.normal",
+              },
+            },
+          },
+          "prefix": "k",
+        },
+        "when": "editorTextFocus && dance.mode == 'insert'",
+  }
+]
