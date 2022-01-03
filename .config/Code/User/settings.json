@@ -45,4 +45,7 @@
     },
     "window.zoomLevel": 1,
     "typescript.updateImportsOnFileMove.enabled": "always",
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "workbench.colorTheme": "Monokai Pro",
+    "workbench.iconTheme": "Monokai Pro Icons",
 }

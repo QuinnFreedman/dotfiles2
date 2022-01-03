@@ -106,78 +106,35 @@ include () {
     [[ -f "$1" ]] && source "$1"
 }
 
-include ~/.init_dotfiles.sh
-
-
-# aliases
-
-if command -v nvim &>/dev/null; then
-    alias vi="nvim"
-    alias vim="nvim"
-fi
-
-if command -v gvim &>/dev/null; then
-    alias g="gvim"
-fi
-alias open="xdg-open"
-
-alias ls='lsd'
-alias ll='ls -lh'
-alias la='ls -a'
-alias lla='ls -lahF'
-alias lt='ls --tree'
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH="$HOME/.scripts:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.nimble/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/usr/local/gcc-arm/bin:$PATH"
-export PATH="/usr/local/lib/nodejs/bin:$PATH"
-export PATH="$HOME/.local/share/umake/bin/:$PATH"
-export PATH="$HOME/.local/share/umake/nodejs/nodejs-lang/bin:$PATH"
-
-fpath+=~/.zfunc
-
-if command -v yarn &>/dev/null; then
-    # export PATH="$(yarn global bin):$PATH"
-    export PATH="$HOME/.npm_modules/bin:$PATH"
-fi
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
-
 if [[ ! -z "$WSL_DISTRO_NAME" && -t 1 && -z "$TMUX" ]]; then
     # running inside WSL terminal
     tmux new-session -A -s main
 fi
 
-function apt-history(){
-      case "$1" in
-        install)
-              cat /var/log/dpkg.log | grep 'install '
-              ;;
-        upgrade|remove)
-              cat /var/log/dpkg.log | grep $1
-              ;;
-        rollback)
-              cat /var/log/dpkg.log | grep upgrade | \
-                  grep "$2" -A10000000 | \
-                  grep "$3" -B10000000 | \
-                  awk '{print $4"="$5}'
-              ;;
-        *)
-              cat /var/log/dpkg.log
-              ;;
-      esac
-}
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh" || return true
+# aliases
+
+alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias open="xdg-open"
+alias ls='lsd'
+alias ll='ls -lh'
+alias la='ls -a'
+alias lla='ls -lahF'
+alias lt='ls --tree'
+alias path='echo $PATH | sed "s/:/\\n/g"'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+fpath+=~/.zfunc
+
+# PATH
+ 
+export PATH="$HOME/.scripts:$HOME/.local/bin:$PATH"
+
+[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+
+if command -v yarn &>/dev/null; then
+    # export PATH="$(yarn global bin):$PATH"
+    export PATH="$HOME/.yarn/bin:$PATH"
+fi
+
