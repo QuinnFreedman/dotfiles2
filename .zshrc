@@ -64,7 +64,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git extract docker zsh-syntax-highlighting copydir copyfile)
+plugins=(git extract docker zsh-syntax-highlighting copypath copyfile fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,13 +123,13 @@ alias lla='ls -lahF'
 alias lt='ls --tree'
 alias path='echo $PATH | sed "s/:/\\n/g"'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 fpath+=~/.zfunc
 
 # PATH
  
 export PATH="$HOME/.scripts:$HOME/.local/bin:$PATH"
+
+export PATH=$PATH:/usr/local/go/bin
 
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 
@@ -138,3 +138,7 @@ if command -v yarn &>/dev/null; then
     export PATH="$HOME/.yarn/bin:$PATH"
 fi
 
+set ANDROID_SDK_ROOT
+export ANDROID_SDK_ROOT="$HOME/.android/sdk"
+export ANDROID_HOME="$ANDROID_SDK_ROOT"
+export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/tools/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH"

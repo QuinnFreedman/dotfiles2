@@ -102,6 +102,10 @@ plug 'delapouite/kakoune-select-view' %{
 
 plug "occivink/kakoune-sudo-write"
 
+plug "andreyorst/fzf.kak" config %{
+    map global normal <c-f> '<esc>: fzf-mode<ret>' -docstring 'fzf mode'
+}
+
 define-command ctrld -docstring 'does the ctrl-d thing' %{
     try %{
         # check if more than one character is selected
