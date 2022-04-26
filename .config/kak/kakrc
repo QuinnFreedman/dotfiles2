@@ -81,7 +81,37 @@ plug "alexherbo2/auto-pairs.kak"
 plug "ul/kak-lsp" do %{
     cargo install --locked --force --path .
 } config %{
-    hook global WinSetOption filetype=(elm|rust|python|go|javascript|typescript|c|cpp) %{
+    hook global WinSetOption filetype=(python) %{
+        lsp-enable-window
+        lsp-auto-hover-disable
+        lsp-auto-signature-help-enable
+        set-option window formatcmd "black --fast -q -"
+        hook window BufWritePre .* format
+    }
+    
+    hook global WinSetOption filetype=(jsx|tsx|typescript|javascript) %{
+        lsp-enable-window
+        lsp-auto-hover-disable
+        lsp-auto-signature-help-enable
+        # should use %opt{bufname} but can't figure out how to string interpolate
+        set-option window formatcmd "prettier --stdin-filepath _.tsx"
+        set-option window indentwidth 2
+        hook window BufWritePre .* format
+    }
+
+    hook global WinSetOption filetype=(css) %{
+        lsp-enable-window
+        set-option window formatcmd "prettier --stdin-filepath _.css"
+        hook window BufWritePre .* format
+    }
+
+    hook global WinSetOption filetype=(json) %{
+        lsp-enable-window
+        set-option window formatcmd "prettier --stdin-filepath _.json"
+        hook window BufWritePre .* format
+    }
+    
+    hook global WinSetOption filetype=(go) %{
         lsp-enable-window
         lsp-auto-hover-disable
         # lsp-auto-signature-help-enalbe
@@ -104,6 +134,20 @@ plug "occivink/kakoune-sudo-write"
 
 plug "andreyorst/fzf.kak" config %{
     map global normal <c-f> '<esc>: fzf-mode<ret>' -docstring 'fzf mode'
+}
+
+plug "andreyorst/kaktree" config %{
+    hook global WinSetOption filetype=kaktree %{
+        remove-highlighter buffer/numbers
+        remove-highlighter buffer/matching
+        remove-highlighter buffer/wrap
+        remove-highlighter buffer/show-whitespaces
+    }
+    kaktree-enable
+} defer kaktree %{
+    set-option global kaktree_dir_icon_open  '▾ 🗁 '
+    set-option global kaktree_dir_icon_close '▸ 🗀 '
+    set-option global kaktree_file_icon      '⠀⠀🖺'
 }
 
 define-command ctrld -docstring 'does the ctrl-d thing' %{

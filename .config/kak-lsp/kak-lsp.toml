@@ -1,0 +1,32 @@
+snippet_support = false
+verbosity = 3
+
+[server]
+# exit session if no requests were received during given period in seconds
+# works only in unix sockets mode (-s/--session)
+# set to 0 to disable
+timeout = 1800 # seconds = 30 minutes
+
+[language.python]
+filetypes = ["python"]
+roots = ["requirements.txt", "setup.py", ".git", ".hg"]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language.tsx]
+filetypes = ["typescript"]
+roots = ["package.json", "tsconfig.json"]
+command = "npx"
+args = ["typescript-language-server", "--stdio"]
+
+[language.json]
+filetypes = ["json"]
+roots = ["package.json", ".git"]
+command = "vscode-json-languageserver"
+args = ["--stdio"]
+
+[language.css]
+filetypes = ["css"]
+roots = ["package.json", ".git"]
+command = "css-languageserver"
+args = ["--stdio"]
