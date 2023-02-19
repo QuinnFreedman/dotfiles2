@@ -1,0 +1,23 @@
+[[language]]
+name = "javascript"
+formatter = { command = "prettier", args = ["--stdin-filepath", "_.tsx"] }
+auto-format = true
+roots = ["package.json"]
+
+[[language]]
+name = "jsx"
+formatter = { command = "prettier", args = ["--stdin-filepath", "_.tsx"] }
+auto-format = true
+roots = ["package.json"]
+
+[[language]]
+name = "typescript"
+formatter = { command = "prettier", args = ["--stdin-filepath", "_.tsx"] }
+auto-format = true
+roots = ["package.json"]
+
+[[language]]
+name = "tsx"
+formatter = { command = "prettier", args = ["--stdin-filepath", "_.tsx"] }
+auto-format = true
+roots = ["package.json"]
