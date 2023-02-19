@@ -93,7 +93,7 @@ plug "ul/kak-lsp" do %{
         lsp-enable-window
         lsp-auto-hover-disable
         lsp-auto-signature-help-enable
-        # should use %opt{bufname} but can't figure out how to string interpolate
+        # should be %opt{bufname} but can't figure out string interpolation
         set-option window formatcmd "prettier --stdin-filepath _.tsx"
         set-option window indentwidth 2
         hook window BufWritePre .* format
@@ -111,7 +111,7 @@ plug "ul/kak-lsp" do %{
         hook window BufWritePre .* format
     }
     
-    hook global WinSetOption filetype=(go) %{
+    hook global WinSetOption filetype=(go|dart) %{
         lsp-enable-window
         lsp-auto-hover-disable
         # lsp-auto-signature-help-enalbe
@@ -133,9 +133,16 @@ plug 'delapouite/kakoune-select-view' %{
 plug "occivink/kakoune-sudo-write"
 
 plug "andreyorst/fzf.kak" config %{
+    # set-option global fzf_file_command "find . \( -path '*/.svn*' -o -path '*/.git*' -o -path '*/node_modules*' \) -prune -o -type f -print"
     map global normal <c-f> '<esc>: fzf-mode<ret>' -docstring 'fzf mode'
+} defer "fzf-file" %{
+    set-option global fzf_file_command "rg --files"
+    set-option global fzf_preview false
+} defer "fzf-grep" %{
+    set-option global fzf_grep_command "rg"
+    set-option global fzf_grep_preview false
 }
-
+ 
 plug "andreyorst/kaktree" config %{
     hook global WinSetOption filetype=kaktree %{
         remove-highlighter buffer/numbers

@@ -1,5 +1,5 @@
 snippet_support = false
-verbosity = 3
+verbosity = 4
 
 [server]
 # exit session if no requests were received during given period in seconds
@@ -30,3 +30,21 @@ filetypes = ["css"]
 roots = ["package.json", ".git"]
 command = "css-languageserver"
 args = ["--stdio"]
+
+[language.go]
+filetypes = ["go"]
+roots = ["Gopkg.toml", "go.mod", ".git", ".hg"]
+command = "gopls"
+args = ["--vv"]
+# offset_encoding = "utf-8"
+# settings_section = "gopls"
+# [language.go.settings.gopls]
+# See https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+# "build.buildFlags" = []
+
+[language.dart]
+# start shell to find path to dart analysis server source
+filetypes = ["dart"]
+roots = ["pubspec.yaml", ".git"]
+command = "dart"
+args = ["language-server"]

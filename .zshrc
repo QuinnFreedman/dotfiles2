@@ -121,6 +121,7 @@ alias ll='ls -lh'
 alias la='ls -a'
 alias lla='ls -lahF'
 alias lt='ls --tree'
+alias cat='batcat'
 alias path='echo $PATH | sed "s/:/\\n/g"'
 
 fpath+=~/.zfunc
@@ -129,7 +130,8 @@ fpath+=~/.zfunc
  
 export PATH="$HOME/.scripts:$HOME/.local/bin:$PATH"
 
-export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
+export PATH="$PATH:$HOME/zig"
 
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 
@@ -142,3 +144,5 @@ set ANDROID_SDK_ROOT
 export ANDROID_SDK_ROOT="$HOME/.android/sdk"
 export ANDROID_HOME="$ANDROID_SDK_ROOT"
 export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/tools/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
