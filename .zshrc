@@ -116,12 +116,21 @@ fi
 
 alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias open="xdg-open"
-alias ls='lsd'
-alias ll='ls -lh'
-alias la='ls -a'
-alias lla='ls -lahF'
-alias lt='ls --tree'
-alias cat='batcat'
+
+if command -v lsd &> /dev/null; then
+  alias ls='lsd'
+  alias ll='ls -lh'
+  alias la='ls -a'
+  alias lla='ls -lahF'
+  alias lt='ls --tree'
+fi
+
+if command -v bat &> /dev/null; then
+  alias cat='bat'
+elif command -v batcat &> /dev/null; then
+  alias cat='batcat'
+fi
+
 alias path='echo $PATH | sed "s/:/\\n/g"'
 
 fpath+=~/.zfunc
@@ -132,6 +141,8 @@ export PATH="$HOME/.scripts:$HOME/.local/bin:$PATH"
 
 export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
 export PATH="$PATH:$HOME/zig"
+export PATH="$PATH:$HOME/.cargo/env"
+
 
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 
