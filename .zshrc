@@ -131,6 +131,10 @@ elif command -v batcat &> /dev/null; then
   alias cat='batcat'
 fi
 
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init --cmd cd zsh)"
+fi
+
 alias path='echo $PATH | sed "s/:/\\n/g"'
 
 fpath+=~/.zfunc

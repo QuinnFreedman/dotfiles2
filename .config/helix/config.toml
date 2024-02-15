@@ -1,4 +1,4 @@
-theme = "monokai_pro_custom"
+theme = "monokai_pro"
 
 [editor.file-picker]
 hidden = false
