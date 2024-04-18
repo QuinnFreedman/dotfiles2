@@ -11,6 +11,7 @@ DEFAULT_USER=`whoami`
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster"
+PROMPT_EOL_MARK=$'\u23ce\u0338'
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -76,11 +77,12 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='kak'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='gvim'
+# fi
+export EDITOR='hx'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -141,23 +143,31 @@ fpath+=~/.zfunc
 
 # PATH
  
-export PATH="$HOME/.scripts:$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.scripts:$HOME/.local/bin:$HOME/.local/share/flatpak/exports/bin"
 
-export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
-export PATH="$PATH:$HOME/zig"
+# export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
+# export PATH="$PATH:$HOME/zig"
 export PATH="$PATH:$HOME/.cargo/env"
-
 
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 
 if command -v yarn &>/dev/null; then
     # export PATH="$(yarn global bin):$PATH"
-    export PATH="$HOME/.yarn/bin:$PATH"
+    export PATH="$PATH:$HOME/.yarn/bin"
 fi
 
-set ANDROID_SDK_ROOT
-export ANDROID_SDK_ROOT="$HOME/.android/sdk"
-export ANDROID_HOME="$ANDROID_SDK_ROOT"
-export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/tools/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+# set ANDROID_SDK_ROOT
+# export ANDROID_SDK_ROOT="$HOME/.android/sdk"
+# export ANDROID_HOME="$ANDROID_SDK_ROOT"
+# export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/tools/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+
+# # bun completions
+# [ -s "/home/quinn/.bun/_bun" ] && source "/home/quinn/.bun/_bun"
+
+# # bun
+# export BUN_INSTALL="$HOME/.bun"
+# export PATH="$BUN_INSTALL/bin:$PATH"
+
+export PATH="$PATH:$HOME/.cargo/bin"
