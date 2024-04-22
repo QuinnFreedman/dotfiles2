@@ -89,7 +89,7 @@ def process_files(path, regex, inverse, rename, recursive, preview):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
             description="Select and rename files with Python regexs",
-            epilog='Example: refind -r "^(.*)\.txt$" --rename "{0}.foo"'
+            epilog='Example: refind -r "^(.*)\\.txt$" --rename "{0}.foo"'
             )
     parser.add_argument("-not", action="store_true", dest='inverse',
             help="Select files NOT matching REGEX.")
