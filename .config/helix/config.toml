@@ -1,4 +1,4 @@
-theme = "monokai_pro"
+theme = "monokai_pro_custom"
 
 [editor]
 jump-label-alphabet = "asdfjklghqweruiopt;"

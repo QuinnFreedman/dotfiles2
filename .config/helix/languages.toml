@@ -5,3 +5,7 @@ args = ["--stdio"]
 [[language]]
 name = "rust"
 language-servers = ["rust-analyzer", "cspell"]
+
+[[language]]
+name = "markdown"
+language-servers = [ "marksman", "cspell" ]
