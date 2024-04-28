@@ -1,7 +1,7 @@
-fish_add_path "~/.local/bin"
-fish_add_path "~/.cargo/bin"
-fish_add_path "~/.scripts"
-fish_add_path "~/.local/share/flatpak/exports/bin"
+fish_add_path ~/.local/bin
+fish_add_path ~/.cargo/bin
+fish_add_path ~/.scripts
+fish_add_path ~/.local/share/flatpak/exports/bin
 
 if status is-interactive
     rps --init fish | source
@@ -21,7 +21,7 @@ if status is-interactive
         alias ll="lsd -lh"
         alias lla="lsd -lah"
         alias la="lsd -a"
-        alias lt="lsd --tree"
+        alias lt="lsd --tree --depth=3"
     end
 
     function fish_greeting
