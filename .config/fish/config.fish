@@ -24,6 +24,10 @@ if status is-interactive
         alias lt="lsd --tree --depth=3"
     end
 
+    if type -q batcat
+        alias cat=batcat
+    end
+
     function fish_greeting
     end
 

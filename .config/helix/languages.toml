@@ -7,5 +7,9 @@ name = "rust"
 language-servers = ["rust-analyzer", "cspell"]
 
 [[language]]
+name = "go"
+language-servers = ["gopls", "cspell"]
+
+[[language]]
 name = "markdown"
 language-servers = [ "marksman", "cspell" ]
