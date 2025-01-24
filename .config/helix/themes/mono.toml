@@ -1,0 +1,54 @@
+"ui.menu" = { fg = "black", bg = "white" }
+"ui.menu.selected" = { modifiers = ["reversed"] }
+"ui.linenr" = { fg = "white", bg = "black" }
+"ui.popup" = { modifiers = ["reversed"] }
+"ui.linenr.selected" = { fg = "white", bg = "black", modifiers = ["bold"] }
+"ui.selection" = { fg = "black", bg = "white", modifiers = ["underlined"] }
+"ui.selection.primary" = { fg = "black", bg = "white" }
+"ui.text.inactive" = { fg = "white" }
+"comment" = { fg = "white", modifiers = ["italic"]  }
+"ui.statusline" = { fg = "black", bg = "white" }
+# "ui.statusline.inactive" = { fg = "black", bg = "white" }
+"ui.cursor" = { fg = "black", bg = "white", modifiers = ["bold"] }
+"variable" = "white"
+"constant.numeric" = "white"
+"constant" = "white"
+"attributes" = "white"
+"type" = "white"
+"ui.cursor.match" = { modifiers = ["underlined"] }
+"string" = "white"
+"variable.other.member" = "white"
+"constant.character.escape" = "white"
+"function" = "white"
+"constructor" = "white"
+"special" = "white"
+"keyword" = "white"
+"label" = "white"
+"namespace" = "white"
+"ui.help" = { fg = "white", bg = "black" }
+"ui.statusline.insert" = { fg = "black", bg = "white" }
+"ui.statusline.select" = { fg = "black", bg = "white" }
+"ui.virtual" = { fg = "white", modifiers = ["italic"] }
+"ui.virtual.jump-label" = { fg = "black", bg = "white" }
+"ui.virtual.ruler" = { bg = "black" }
+
+"markup.heading" = "white"
+"markup.list" = "white"
+"markup.bold" = { fg = "white", modifiers = ["bold"] }
+"markup.italic" = { fg = "white", modifiers = ["italic"] }
+"markup.link.url" = { fg = "white", modifiers = ["underlined"] }
+"markup.link.text" = "white"
+"markup.quote" = "white"
+"markup.raw" = "white"
+
+"diff.plus" = "white"
+"diff.delta" = "white"
+"diff.minus" = "white"
+
+"diagnostic" = { modifiers = ["underlined"] }
+"ui.gutter" = { bg = "black" }
+"info" = "white"
+"hint" = "white"
+"debug" = "white"
+"warning" = "white"
+"error" = "white"
